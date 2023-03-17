@@ -15,12 +15,11 @@ public class MainFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    private Button btnLogInMain, btnSignUpMain;
+    private Button btnLogInMain, btnSignUpMain,AllProducts,AddProduct;
 
     public MainFragment() {
         // Required empty public constructor
     }
-
     public static MainFragment newInstance(String param1, String param2) {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
@@ -56,6 +55,8 @@ public class MainFragment extends Fragment {
     public void func() {
 
         btnLogInMain = getView().findViewById(R.id.btnLogInMain);
+        AllProducts = getView().findViewById(R.id.AllProducts);
+        AddProduct = getView().findViewById(R.id.AddProduct);
         btnSignUpMain = getView().findViewById(R.id.btnSignUpMain);
         btnSignUpMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +73,14 @@ public class MainFragment extends Fragment {
                 LogInFragment LogInFragment = new LogInFragment();
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction().replace(R.id.FrameLayout, LogInFragment, LogInFragment.getTag()).commit();
+            }
+        });
+        AddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddProductFragment AddProductFragment = new AddProductFragment();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.AddProduct, AddProductFragment, AddProductFragment.getTag()).commit();
             }
         });
     }
