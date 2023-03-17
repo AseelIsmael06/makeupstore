@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class LogInFragment extends Fragment {
     private EditText etEmailLogIn, etPassLogIn;
-    private Button btnLogin;
+    private Button btnLogin,btnForgetPassword;
     private ImageButton ivGoToMainLogIn;
     private FirebaseServices fbs;
     // TODO: Rename parameter arguments, choose names that match
@@ -74,6 +75,7 @@ public class LogInFragment extends Fragment {
     public void onStart() {
         super.onStart();
         etEmailLogIn = getView().findViewById(R.id.etEmailLogIn);
+        btnForgetPassword = getView().findViewById(R.id.btnForgetPassword);
         fbs = FirebaseServices.getInstance();
         etPassLogIn = getView().findViewById(R.id.etPassLogIn);
         ivGoToMainLogIn = getView().findViewById(R.id.ivGoToMainLogIn);
@@ -82,6 +84,15 @@ public class LogInFragment extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), MainActivity.class);
                 startActivity(i);
+            }
+        });
+        btnForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                ForgotPasswordFragment ForgotPasswordFragment = new ForgotPasswordFragment();
+                FragmentManager manager = getFragmentManager();
+                manager.beginTransaction().replace(R.id.btnForgetPassword, ForgotPasswordFragment, ForgotPasswordFragment.getTag()).commit();
             }
         });
         btnLogin = getView().findViewById(R.id.btnLogin);

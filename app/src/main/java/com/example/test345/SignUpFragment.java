@@ -1,8 +1,8 @@
 package com.example.test345;
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-
 public class SignUpFragment extends Fragment
 {
     private Button btnSignUpSIGNUP;
@@ -89,7 +88,6 @@ public class SignUpFragment extends Fragment
                     public void onComplete(@NonNull Task<AuthResult> task) {
                     }
                 });
-
             }
         });
     }

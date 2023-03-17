@@ -9,7 +9,6 @@ public class FirebaseServices {
     private FirebaseAuth auth;
     private FirebaseFirestore fire;
     private FirebaseStorage storage;
-
     public FirebaseAuth getAuth() {
         return auth;
     }
