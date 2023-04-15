@@ -1,14 +1,13 @@
 package com.example.test345;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 public class MainFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -74,14 +73,7 @@ public class MainFragment extends Fragment {
                 manager.beginTransaction().replace(R.id.FrameLayout, LogInFragment, LogInFragment.getTag()).commit();
             }
         });
-        AddProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddProductFragment AddProductFragment = new AddProductFragment();
-                FragmentManager manager = getFragmentManager();
-                manager.beginTransaction().replace(R.id.AddProduct, AddProductFragment, AddProductFragment.getTag()).commit();
-            }
-        });
+
     }
 
 }
