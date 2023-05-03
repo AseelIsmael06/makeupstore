@@ -5,6 +5,15 @@ public class Product {
     private String proInfo;
     private String proCompany;
     private String proPhoto;
+
+    public Product(String productName, String proInfo, String proCompany, String proPhoto, String proPrice) {
+        this.productName = productName;
+        this.proInfo = proInfo;
+        this.proCompany = proCompany;
+        this.proPhoto = proPhoto;
+        this.proPrice = proPrice;
+    }
+
     private String proPrice;
     public Product() {
         this.productName =productName;
