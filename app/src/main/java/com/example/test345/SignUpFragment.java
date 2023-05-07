@@ -1,15 +1,16 @@
 package com.example.test345;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -74,7 +75,8 @@ public class SignUpFragment extends Fragment
         fbs=FirebaseServices.getInstance();
         etPasswordSIGNUP = getView().findViewById(R.id.etPasswordSIGNUP);
         btnSignUpSIGNUP = getView().findViewById(R.id.btnSignUpSIGNUP);
-        btnSignUpSIGNUP.setOnClickListener(new View.OnClickListener() {
+        btnSignUpSIGNUP.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 String eMail = etUsernameSIGNUP.getText().toString();
@@ -83,9 +85,16 @@ public class SignUpFragment extends Fragment
                     Toast.makeText(getActivity(), "some fields are empty!!!!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                fbs.getAuth().createUserWithEmailAndPassword(eMail, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                fbs.getAuth().createUserWithEmailAndPassword(eMail, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>()
+                {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+
+                            Intent i = new Intent(getActivity(), AllProductsActivity.class);
+                            startActivity(i);
+                            ((Activity) getActivity()).overridePendingTransition(0, 0);
+
                     }
                 });
             }

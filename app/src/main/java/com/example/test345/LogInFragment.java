@@ -1,11 +1,8 @@
 package com.example.test345;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +11,17 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class LogInFragment extends Fragment {
+public class LogInFragment extends Fragment
+{
     private EditText etEmailLogIn, etPassLogIn;
     private Button btnLogin,btnForgetPassword;
     private ImageButton ivGoToMainLogIn;
@@ -72,7 +73,8 @@ public class LogInFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
+    public void onStart()
+    {
         super.onStart();
         etEmailLogIn = getView().findViewById(R.id.etEmailLogIn);
         btnForgetPassword = getView().findViewById(R.id.btnForgetPassword);
@@ -96,20 +98,30 @@ public class LogInFragment extends Fragment {
             }
         });
         btnLogin = getView().findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 String eMail = etEmailLogIn.getText().toString();
                 String password = etPassLogIn.getText().toString();
-                if (eMail.trim().isEmpty() && password.trim().isEmpty()) {
+                if (eMail.trim().isEmpty() && password.trim().isEmpty())
+                {
                     Toast.makeText(getActivity(), "some fields are empty!!!!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Task<AuthResult> authResultTask = fbs.getAuth().signInWithEmailAndPassword(eMail, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                Task<AuthResult> authResultTask = fbs.getAuth().signInWithEmailAndPassword(eMail, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>()
+                {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
+
+                            Intent i = new Intent(getActivity(), AllProductsActivity.class);
+                            startActivity(i);
+                            ((Activity) getActivity()).overridePendingTransition(0, 0);
                     }
-                });
+                   });
+
             }
         });
     }

@@ -1,5 +1,7 @@
 package com.example.test345;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +58,9 @@ public class MainFragment extends Fragment {
         btnLogInMain = getView().findViewById(R.id.btnLogInMain);
         AddProduct = getView().findViewById(R.id.AddProduct);
         btnSignUpMain = getView().findViewById(R.id.btnSignUpMain);
+
+        //TRANS FROM FRAGMENT TO FRAGMENT BY BUTTON CLICK
+
         btnSignUpMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +69,9 @@ public class MainFragment extends Fragment {
                 manager.beginTransaction().replace(R.id.FrameLayout, SignUpFragment, SignUpFragment.getTag()).commit();
             }
         });
+
+        //TRANS FROM FRAGMENT TO FRAGMENT BY BUTTON CLICK
+
         btnLogInMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +81,19 @@ public class MainFragment extends Fragment {
                 manager.beginTransaction().replace(R.id.FrameLayout, LogInFragment, LogInFragment.getTag()).commit();
             }
         });
+        //TRANS FROM FRAGMENT TO ACTIVITY BY BUTTON CLICK
 
+        AddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), AddProductActivity.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
     }
-
 }
+
+
+
