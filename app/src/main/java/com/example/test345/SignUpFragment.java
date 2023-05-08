@@ -90,7 +90,6 @@ public class SignUpFragment extends Fragment
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {
-
                             Intent i = new Intent(getActivity(), AllProductsActivity.class);
                             startActivity(i);
                             ((Activity) getActivity()).overridePendingTransition(0, 0);
