@@ -1,4 +1,5 @@
 package com.example.test345;
+
 import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
@@ -54,7 +55,6 @@ public class AddProductActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
             }
         });
-
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -76,9 +76,7 @@ public class AddProductActivity extends AppCompatActivity {
             }
         }
     }
-
-
-    public void add(View view)
+    private void add(View view)
     {
         // check if any field is empty
         String productName, proInfo, proCompany, proPhoto, proPrice;
@@ -96,7 +94,6 @@ public class AddProductActivity extends AppCompatActivity {
             Toast.makeText(this, "error fields empty", Toast.LENGTH_SHORT).show();
             return;
         }
-
         Product product = new Product(productName, proInfo, proCompany, proPhoto, proPrice);
         //public Product(String productName, String proInfo, String proCompany, String proPhoto, String proPrice) {
         fbs.getFire().collection("Products")
@@ -135,6 +132,4 @@ public class AddProductActivity extends AppCompatActivity {
         });
         return ref.getPath();
     }
-
-
 }
