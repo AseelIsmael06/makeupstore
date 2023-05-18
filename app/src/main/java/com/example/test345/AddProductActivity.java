@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,8 +30,9 @@ import java.util.UUID;
 public class AddProductActivity extends AppCompatActivity {
     private EditText Name, Brand, Info, Price;
     private Button Add;
-    private ImageView ProductPicture;
+    private ImageButton ProductPicture;
     private FirebaseServices fbs;
+
     public static final int PICK_IMAGE = 1;
     Bitmap ProductPho = null;
 
@@ -39,22 +40,6 @@ public class AddProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
-        Name = findViewById(R.id.etProductName);
-        Info = findViewById(R.id.etBrand);
-        ProductPicture = findViewById(R.id.etImage);
-        Price = findViewById(R.id.etProductPrice);
-        Brand = findViewById(R.id.etBrand);
-        Add = findViewById(R.id.btnAdd);
-        fbs = FirebaseServices.getInstance();
-        ProductPicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-            }
-        });
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -88,12 +73,14 @@ public class AddProductActivity extends AppCompatActivity {
             proPhoto = "no_image";
         else
             proPhoto = UploadImageToFirebase();
-
         if (productName.trim().isEmpty() || proInfo.trim().isEmpty()
-                || proPhoto.trim().isEmpty()) {
+                || proPhoto.trim().isEmpty()||ProductPicture.getDrawable() == null)
+        {
             Toast.makeText(this, "error fields empty", Toast.LENGTH_SHORT).show();
             return;
         }
+        else
+        {
         Product product = new Product(productName, proInfo, proCompany, proPhoto, proPrice);
         //public Product(String productName, String proInfo, String proCompany, String proPhoto, String proPrice) {
         fbs.getFire().collection("Products")
@@ -110,6 +97,7 @@ public class AddProductActivity extends AppCompatActivity {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+    }
     }
 
     private String UploadImageToFirebase()
@@ -132,4 +120,36 @@ public class AddProductActivity extends AppCompatActivity {
         });
         return ref.getPath();
     }
-}
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        ConnectException();
+        Add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                add(view);
+            }
+            });
+    }
+    public void ConnectException()
+    {
+        Name = findViewById(R.id.etProductName);
+        Info = findViewById(R.id.etInfo);
+        ProductPicture = findViewById(R.id.etImage);
+        Price = findViewById(R.id.etProductPrice);
+        Brand = findViewById(R.id.etBrand);
+        Add = findViewById(R.id.btnAdd);
+        fbs = FirebaseServices.getInstance();
+        ProductPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+            }
+        });
+    }
+    }

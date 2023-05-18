@@ -16,7 +16,7 @@ public class MainFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    private Button btnLogInMain, btnSignUpMain,AddProduct;
+    private Button btnLogInMain, btnSignUpMain,AddProduct,All;
 
     public MainFragment() {
         // Required empty public constructor
@@ -58,7 +58,7 @@ public class MainFragment extends Fragment {
         btnLogInMain = getView().findViewById(R.id.btnLogInMain);
         AddProduct = getView().findViewById(R.id.AddProduct);
         btnSignUpMain = getView().findViewById(R.id.btnSignUpMain);
-
+        All=getView().findViewById(R.id.btnAll);
         //TRANS FROM FRAGMENT TO FRAGMENT BY BUTTON CLICK
 
         btnSignUpMain.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +86,15 @@ public class MainFragment extends Fragment {
         AddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent i = new Intent(getActivity(), AddProductActivity.class);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+            }
+        });
+        All.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), AllProductsActivity.class);
                 startActivity(i);
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
