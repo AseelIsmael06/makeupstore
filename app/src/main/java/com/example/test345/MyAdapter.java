@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 {
-
+    ArrayList<Product>list;
     Context context ;
 
     public MyAdapter(Context context, ArrayList<Product> list) {
@@ -30,8 +30,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         this.list = list;
     }
 
-    ArrayList<Product>list;
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
@@ -39,7 +37,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         View v= LayoutInflater.from(context).inflate(R.layout.row,parent,false);
          return new MyViewHolder(v);
     }
-
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position)
     {
@@ -47,13 +44,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         holder.Name.setText(product.getProductName());
         holder.Price.setText(product.getProPrice());
     }
-
     @Override
     public int getItemCount()
     {
-        return list.size();
+            return list.size();
     }
-
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView Name,Price;
